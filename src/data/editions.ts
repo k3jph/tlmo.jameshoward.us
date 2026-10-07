@@ -101,7 +101,7 @@ export const secondEditionChapters: Chapter[] = [
   { n: 23, title: 'Effective Design and Use of Video for Learning Mathematics', authors: ['Trefor Bazett'], part: 'Using Technology', isNew: true },
   { n: 24, title: 'COVID-19 Impact on Digital Resource Use in Secondary Mathematics Instruction', authors: ['Deborah Moore-Russo', 'Milton Sheehan'], part: 'Using Technology', isNew: true },
   { n: 25, title: 'Using Technology to Support Students’ Meanings in Single-Variable Calculus: Insights from Iterative Design-Research Studies', authors: ['Michael Tallman', 'Zackery Reed', 'Michael Oehrtman', 'Jason Martin'], part: 'Using Technology', isNew: true },
-  { n: 26, title: 'Theoretical Principles for the Design of Multimedia Learning Resources that Stimulate Students’ Experience of Intellectual Need', authors: ['Michael Tallman', 'Aaron Weinberg', 'Steven Jones', 'Jason Martin'], part: 'Using Technology', isNew: true },
+  { n: 26, title: 'Theoretical Principles for the Design of Multimedia Learning Resources that Stimulate Students’ Experience of Intellectual Need', authors: ['Michael Tallman', 'Aaron Weinberg', 'Jason Martin', 'Steven Jones'], part: 'Using Technology', isNew: true },
   { n: 27, title: 'MOOCs for Mathematics Teacher Education: New Environments for Professional Development', authors: ['Eugenia Taranto'], part: 'Teacher Education' },
   { n: 28, title: 'Online Mathematics “Self-Help Kiosks” to Support Pre-Service Teachers', authors: ['Helen Forgasz', 'Jennifer Hall', 'Simone Zmood'], part: 'Teacher Education' },
   { n: 29, title: 'Online Mathematics Education: The Good, the Bad, and the General Overview', authors: ['Sarah Ferguson'], part: 'Commentary' }
@@ -118,8 +118,14 @@ export const secondToFirst: Record<number, number> = Object.fromEntries(
   Object.entries(firstToSecond).map(([first, second]) => [second, Number(first)])
 );
 
+const contributorAliases: Record<string, string> = {
+  'Michael Tallman': 'Michael A. Tallman'
+};
+
+export const canonicalContributorName = (name: string) => contributorAliases[name] ?? name;
+
 export const contributorSlug = (name: string) =>
-  name
+  canonicalContributorName(name)
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
@@ -136,7 +142,8 @@ export const allContributions = [
 
 export const contributors = Array.from(
   allContributions.reduce((map, contribution) => {
-    contribution.authors.forEach(name => {
+    contribution.authors.forEach(bylineName => {
+      const name = canonicalContributorName(bylineName);
       const existing = map.get(name) ?? [];
       existing.push(contribution);
       map.set(name, existing);
