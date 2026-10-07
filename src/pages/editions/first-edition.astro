@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ChapterList from '../../components/ChapterList.astro';
 import { editions, firstEditionChapters } from '../../data/editions';
 const edition = editions[0];
 ---
-<BaseLayout title="First Edition · 2020" description="The 2020 first edition of Teaching and Learning Mathematics Online, edited by James P. Howard, II and John F. Beyers.">
+<BaseLayout title="First Edition · 2020" description="The 2020 first edition of Teaching and Learning Mathematics Online, edited by James P. Howard, II and John F. Beyers." image={edition.cover}>
   <header class="edition-hero">
     <div class="container">
       <div class="cover"><img src={edition.cover} alt="Teaching and Learning Mathematics Online first edition cover" /></div>
@@ -16,7 +17,10 @@ const edition = editions[0];
           <div><span>Pages</span><strong>{edition.pages}</strong></div>
           <div><span>Print ISBN</span><strong>{edition.printIsbn}</strong></div>
         </div>
-        <p><a class="button" href={`https://doi.org/${edition.doi}`}>Publisher / DOI ↗</a></p>
+        <div class="hero-actions">
+          <a class="button" href={'https://doi.org/' + edition.doi}>Publisher / DOI ↗</a>
+          <a class="button secondary" href="/cite/">Cite this edition</a>
+        </div>
       </div>
     </div>
   </header>
@@ -32,11 +36,7 @@ const edition = editions[0];
       </div>
 
       <h2 class="part-heading">Contents</h2>
-      <ol class="chapter-list">
-        {firstEditionChapters.map(chapter => (
-          <li><span class="chapter-no">{String(chapter.n).padStart(2,'0')}</span><span>{chapter.title}</span></li>
-        ))}
-      </ol>
+      <ChapterList chapters={firstEditionChapters} editionSlug="first-edition" />
     </div>
   </section>
 </BaseLayout>
