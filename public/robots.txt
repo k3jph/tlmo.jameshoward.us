@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tlmo.jameshoward.us/sitemap-index.xml

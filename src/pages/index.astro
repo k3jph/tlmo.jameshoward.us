@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MathCanvas from '../components/MathCanvas.astro';
+import EditionCard from '../components/EditionCard.astro';
+import { editions } from '../data/editions';
+const [first, second] = editions;
+---
+<BaseLayout>
+  <section class="hero">
+    <MathCanvas />
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="kicker">James P. Howard, II + John F. Beyers, editors</p>
+        <h1>Teaching<br />and Learning<br /><em>Mathematics</em><br />Online</h1>
+        <p class="hero-deck">Teaching mathematics online is not a matter of moving a lecture onto a screen. It changes how we explain, assess, interact, and sometimes how we think about the mathematics itself.</p>
+        <div class="hero-actions">
+          <a class="button" href="/editions/second-edition/">Explore the second edition</a>
+          <a class="button secondary" href="/editions/">Compare both editions</a>
+        </div>
+      </div>
+      <div class="hero-books" aria-label="Covers of both editions">
+        <img class="first" src={first.cover} alt="First edition cover" />
+        <img class="second" src={second.cover} alt="Second edition cover" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">Two editions · one changing field</p><h2>Before and after the world learned Zoom.</h2></div>
+        <p>The first edition appeared in 2020. The second arrived five years later, after an extraordinary natural experiment forced teachers and students everywhere to find out what online learning could—and could not—do.</p>
+      </div>
+      <div class="editions-stack">
+        <EditionCard edition={second} featured={true} />
+        <EditionCard edition={first} />
+      </div>
+    </div>
+  </section>
+
+  <section class="idea-band">
+    <blockquote>
+      The technology matters. <span>The teaching matters more.</span>
+    </blockquote>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">The change in five years</p><h2>A field grew up very quickly.</h2></div>
+        <p>The organizing questions stayed recognizable. The evidence base, available tools, and collective experience did not.</p>
+      </div>
+      <div class="evolution">
+        <article class="evolution-card">
+          <p class="eyebrow">2020</p>
+          <strong>20</strong>
+          <h3>chapters in the first edition</h3>
+          <p>Course design, student interaction, technology, teacher education, and a closing commentary.</p>
+        </article>
+        <div class="evolution-arrow" aria-hidden="true">→</div>
+        <article class="evolution-card">
+          <p class="eyebrow">2025</p>
+          <strong>29</strong>
+          <h3>chapters in the second edition</h3>
+          <p>A larger book shaped by the experience of teaching through a pandemic and a changed technological environment.</p>
+          <p class="delta"><b>+9 new chapters</b> across course design, interaction, and technology.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

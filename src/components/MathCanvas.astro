@@ -1,0 +1,18 @@
+<div class="math-canvas" aria-hidden="true">
+  <svg viewBox="0 0 900 600" role="img">
+    <g class="grid">
+      {Array.from({length: 16}, (_, i) => <line x1={i * 60} y1="0" x2={i * 60} y2="600" />)}
+      {Array.from({length: 11}, (_, i) => <line x1="0" y1={i * 60} x2="900" y2={i * 60} />)}
+    </g>
+    <path class="curve c1" d="M-20 480 C120 30 255 50 350 330 S590 650 920 80" />
+    <path class="curve c2" d="M-30 300 C110 550 230 535 335 295 S560 50 930 365" />
+    <circle class="point p1" cx="350" cy="330" r="6" />
+    <circle class="point p2" cx="686" cy="294" r="6" />
+    <path class="axis" d="M80 510H830M160 80V550" />
+    <path class="construction" d="M350 330L350 510M350 330L160 330M686 294L686 510M686 294L160 294" />
+    <text x="367" y="316">f(x)</text>
+    <text x="704" y="280">g(x)</text>
+    <text x="748" y="494">x →</text>
+    <text x="174" y="104">y</text>
+  </svg>
+</div>

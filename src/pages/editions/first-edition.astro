@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { editions, firstEditionChapters } from '../../data/editions';
+const edition = editions[0];
+---
+<BaseLayout title="First Edition · 2020" description="The 2020 first edition of Teaching and Learning Mathematics Online, edited by James P. Howard, II and John F. Beyers.">
+  <header class="edition-hero">
+    <div class="container">
+      <div class="cover"><img src={edition.cover} alt="Teaching and Learning Mathematics Online first edition cover" /></div>
+      <div>
+        <p class="edition-year">First edition · 2020</p>
+        <h1>Teaching and Learning Mathematics Online</h1>
+        <p class="hero-deck">{edition.description}</p>
+        <div class="specs">
+          <div><span>Chapters</span><strong>{edition.chapters}</strong></div>
+          <div><span>Pages</span><strong>{edition.pages}</strong></div>
+          <div><span>Print ISBN</span><strong>{edition.printIsbn}</strong></div>
+        </div>
+        <p><a class="button" href={`https://doi.org/${edition.doi}`}>Publisher / DOI ↗</a></p>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="prose">
+        <p class="eyebrow">The original collection</p>
+        <h2>Online mathematics before it was everybody’s mathematics.</h2>
+        <p>The first edition brought together working educators confronting a peculiar problem: mathematics is unusually difficult to move online well. Symbolic notation, diagrams, worked reasoning, anxiety, assessment, and student interaction all resist a simple translation from room to screen.</p>
+        <p>The result was deliberately practical. The book is organized around the things instructors actually have to do: design courses, interact with students, choose and use technology, prepare teachers, and decide what the experience teaches us.</p>
+        <div class="callout"><p><strong>Historical timing:</strong> the book appeared in 2020, at almost exactly the moment online teaching stopped being a specialist concern.</p></div>
+      </div>
+
+      <h2 class="part-heading">Contents</h2>
+      <ol class="chapter-list">
+        {firstEditionChapters.map(chapter => (
+          <li><span class="chapter-no">{String(chapter.n).padStart(2,'0')}</span><span>{chapter.title}</span></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</BaseLayout>

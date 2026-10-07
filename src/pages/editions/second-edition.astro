@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { editions, secondEditionChapters } from '../../data/editions';
+const edition = editions[1];
+---
+<BaseLayout title="Second Edition · 2025" description="The expanded 2025 second edition of Teaching and Learning Mathematics Online, edited by James P. Howard, II and John F. Beyers.">
+  <header class="edition-hero">
+    <div class="container">
+      <div class="cover"><img src={edition.cover} alt="Teaching and Learning Mathematics Online second edition cover" /></div>
+      <div>
+        <p class="edition-year">Second edition · 2025</p>
+        <h1>Teaching and Learning Mathematics Online</h1>
+        <p class="hero-deck">{edition.description}</p>
+        <div class="specs">
+          <div><span>Chapters</span><strong>{edition.chapters}</strong></div>
+          <div><span>Pages</span><strong>{edition.pages}</strong></div>
+          <div><span>Print ISBN</span><strong>{edition.printIsbn}</strong></div>
+        </div>
+        <p><a class="button" href="https://www.routledge.com/Teaching-and-Learning-Mathematics-Online/HowardII-Beyers/p/book/9781032504537">Publisher page ↗</a></p>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="prose">
+        <p class="eyebrow">The expanded edition</p>
+        <h2>Five years later, there was rather more to say.</h2>
+        <p>Between the two editions, online education went through an involuntary global stress test. The second edition keeps the practical organization of the first, but incorporates the lessons of that period and a rapidly changed set of technological possibilities.</p>
+        <p>Nine new chapters broaden the treatment of active learning, assessment, tutoring, discussion, video, digital resources, calculus learning, and multimedia design. They sit alongside revised and continuing work from the first edition rather than replacing it.</p>
+        <div class="callout"><p><strong>New in this edition:</strong> chapters added for 2025 are marked below. The pattern is useful in itself: the greatest expansion came in how students interact and how technology is actually used.</p></div>
+      </div>
+
+      <h2 class="part-heading">Contents</h2>
+      <ol class="chapter-list">
+        {secondEditionChapters.map(chapter => (
+          <li>
+            <span class="chapter-no">{String(chapter.n).padStart(2,'0')}</span>
+            <span>{chapter.title}</span>
+            {chapter.isNew && <span class="new-badge">New in 2e</span>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</BaseLayout>

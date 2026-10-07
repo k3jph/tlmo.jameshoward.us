@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EditionCard from '../../components/EditionCard.astro';
+import { editions } from '../../data/editions';
+const [first, second] = editions;
+---
+<BaseLayout title="The Editions" description="Compare the 2020 first edition and 2025 second edition of Teaching and Learning Mathematics Online.">
+  <header class="page-hero">
+    <div class="container">
+      <p class="eyebrow">2020 → 2025</p>
+      <h1>Two editions of a field in motion.</h1>
+      <p>The first edition documented a mature but still specialized practice. The second edition was built after online teaching became, for a while, nearly universal.</p>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      <div class="editions-stack">
+        <EditionCard edition={second} featured={true} />
+        <EditionCard edition={first} />
+      </div>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">What changed?</p><h2>Nine new chapters, but more than nine new ideas.</h2></div>
+        <p>The second edition adds work on active learning, assessment, tutoring, discussion forums, asynchronous discussion, video, pandemic-era resource use, calculus design research, and multimedia learning.</p>
+      </div>
+      <div class="evolution">
+        <article class="evolution-card"><strong>{first.pages}</strong><h3>pages · 2020</h3><p>Twenty chapters establishing the shared practical problems of online mathematics and statistics education.</p></article>
+        <div class="evolution-arrow" aria-hidden="true">→</div>
+        <article class="evolution-card"><strong>{second.pages}</strong><h3>pages · 2025</h3><p>Twenty-nine chapters, preserving the original architecture while widening the evidence and technology base.</p></article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
