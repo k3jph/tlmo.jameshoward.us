@@ -4,10 +4,12 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 const {
   title = 'Teaching and Learning Mathematics Online',
-  description = 'The companion site for Teaching and Learning Mathematics Online, edited by James P. Howard, II and John F. Beyers.'
+  description = 'The companion site for Teaching and Learning Mathematics Online, edited by James P. Howard, II and John F. Beyers.',
+  image
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -23,12 +25,14 @@ const pageTitle = title === 'Teaching and Learning Mathematics Online'
     <meta name="description" content={description} />
     <meta name="theme-color" content="#173b60" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {image && <meta property="og:image" content={image} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
     <title>{pageTitle}</title>
   </head>
   <body>
@@ -43,8 +47,9 @@ const pageTitle = title === 'Teaching and Learning Mathematics Online'
       </a>
       <nav aria-label="Primary navigation">
         <a href="/editions/">Editions</a>
+        <a href="/chapters/">Chapters</a>
+        <a href="/contributors/">Contributors</a>
         <a href="/resources/">Resources</a>
-        <a href="/about/">About</a>
       </nav>
     </header>
     <main id="main"><slot /></main>
@@ -54,6 +59,9 @@ const pageTitle = title === 'Teaching and Learning Mathematics Online'
         <p>Edited by James P. Howard, II and John F. Beyers.</p>
       </div>
       <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/cite/">Cite</a>
+        <a href="/errata/">Errata</a>
         <a href="/editions/first-edition/">2020 edition</a>
         <a href="/editions/second-edition/">2025 edition</a>
         <a href="https://www.routledge.com/Teaching-and-Learning-Mathematics-Online/HowardII-Beyers/p/book/9781032504537">Publisher ↗</a>
