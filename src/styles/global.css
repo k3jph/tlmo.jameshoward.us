@@ -14,16 +14,19 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; max-width: 100%; overflow-x: clip; }
 body {
   margin: 0;
   color: var(--ink-deep);
   background: var(--paper);
   font-family: var(--sans);
   line-height: 1.6;
+  max-width: 100%;
+  overflow-x: clip;
 }
 a { color: inherit; text-decoration-thickness: .08em; text-underline-offset: .18em; }
 img { display: block; max-width: 100%; }
+main, section, article, .container, .hero-inner, .edition-card, .footer-top, .footer-bottom { min-width: 0; }
 .skip-link {
   position: fixed; left: 1rem; top: 1rem; z-index: 100;
   padding: .6rem .9rem; background: var(--white); color: var(--ink);
@@ -72,7 +75,7 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; }
   gap:4rem;
   position:relative; z-index:2;
 }
-.hero-copy { padding: 5rem 0 6rem; }
+.hero-copy { padding: 5rem 0 6rem; min-width: 0; }
 .kicker, .eyebrow {
   margin: 0 0 .9rem;
   text-transform: uppercase;
@@ -158,6 +161,7 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; }
   box-shadow: 0 28px 50px rgba(7,31,50,.22);
   transform: rotateY(-3deg);
 }
+.edition-copy { min-width: 0; }
 .edition-copy h2 { font:500 clamp(2rem,4vw,3.7rem)/1 var(--serif); letter-spacing:-.035em; margin:.2rem 0 1.3rem; }
 .edition-copy > p:not(.eyebrow) { max-width:700px; font-size:1.04rem; }
 .mini-specs {
@@ -169,7 +173,19 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; }
 .featured .mini-specs div { background:var(--ink); color:white; }
 .mini-specs dt { text-transform:uppercase; font-size:.63rem; letter-spacing:.12em; opacity:.62; }
 .mini-specs dd { margin:.25rem 0 0; font:600 1rem var(--serif); }
-.text-link { font-weight:800; text-decoration:none; border-bottom:2px solid currentColor; padding-bottom:.2rem; }
+.text-link {
+  display: inline-grid;
+  grid-template-columns: minmax(0, auto) auto;
+  align-items: end;
+  gap: .4rem;
+  max-width: 100%;
+  font-weight: 800;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: .2rem;
+}
+.text-link .text-link-label { min-width: 0; }
+.text-link .text-link-arrow { white-space: nowrap; }
 
 .idea-band {
   background:var(--blue);
@@ -414,9 +430,11 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; }
   background: transparent;
   border-color: transparent;
 }
-.editor-lockup-text { min-width: 0; }
+.editor-lockup-text { min-width: 0; max-width: 100%; }
 .footer-domain {
   display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   font: 600 1.28rem var(--serif);
   text-decoration: none;
   margin-bottom: .15rem;
@@ -543,6 +561,8 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; }
 
 @media (max-width: 800px) {
   .site-header { min-height:82px; }
+  .page-hero .container { margin: 0 auto; }
+  .hero-copy, .edition-copy, .editor-lockup-text { min-width: 0; }
   .brand small { display:none; }
   nav { gap:.9rem; font-size:.8rem; }
   .hero, .hero-inner { min-height:auto; }
@@ -565,22 +585,82 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; }
   .cookie-banner-copy { margin-left:0; }
 }
 @media (max-width: 520px) {
-  .site-header { align-items:center; gap:.5rem; flex-wrap:wrap; padding:.65rem 0; }
+  .site-header {
+    align-items: center;
+    gap: .55rem;
+    flex-wrap: wrap;
+    padding: .65rem 0;
+  }
   .brand-mark { width:38px; height:38px; flex-basis:38px; }
-  .site-header nav { width:100%; order:2; justify-content:space-between; gap:.5rem; font-size:.72rem; padding-bottom:.35rem; }
-  .hero h1 { font-size:3.35rem; }
-  .hero-books { min-height:390px; }
-  .hero-books img { width:58%; }
-  .mini-specs { grid-template-columns:1fr; }
+  .site-header nav {
+    width:100%;
+    order:2;
+    justify-content:space-between;
+    gap:.45rem;
+    font-size:.69rem;
+    padding-bottom:.35rem;
+  }
+
+  .hero-inner { width: min(calc(100% - 2rem), var(--max)); }
+  .hero-copy { padding: 3rem 0 1.25rem; }
+  .kicker { font-size: .68rem; letter-spacing: .14em; line-height: 1.5; }
+  .hero h1 {
+    font-size: clamp(2.6rem, 11.2vw, 3rem);
+    line-height: .94;
+    letter-spacing: -.045em;
+    overflow-wrap: normal;
+  }
+  .hero h1 em { display: inline-block; max-width: 100%; }
+  .hero-deck {
+    font-size: 1.08rem;
+    line-height: 1.5;
+    margin: 1.5rem 0;
+  }
+  .hero-actions { display: grid; grid-template-columns: 1fr; }
+  .hero-actions .button { width: 100%; }
+  .hero-books { min-height: 330px; }
+  .hero-books img { width: 61%; max-width: 230px; }
+
+  .section { padding: 3.5rem 1rem; }
+  .section-heading h2, .page-hero h1 { font-size: clamp(2.25rem, 10vw, 3.1rem); }
+  .section-heading p, .page-hero p { font-size: 1.05rem; }
+
+  .edition-card { padding: 1.45rem; gap: 1.6rem; }
+  .edition-card .book-frame { max-width: 230px; }
+  .edition-copy h2 { font-size: clamp(1.85rem, 9vw, 2.35rem); }
+  .edition-copy > p:not(.eyebrow) { font-size: .96rem; }
+  .mini-specs { grid-template-columns:1fr; margin: 1.5rem 0; }
+  .mini-specs div { padding: .75rem .85rem; }
+  .text-link { font-size: .9rem; }
+
+  .idea-band { padding: 4rem 1rem; }
+  .idea-band blockquote { font-size: clamp(2rem, 10vw, 2.75rem); }
+
+  .evolution-card { padding: 1.5rem; }
   .chapter-list li { grid-template-columns:42px 1fr; }
   .new-badge { grid-column:2; justify-self:start; }
   .chapter-meta-grid { grid-template-columns:1fr; }
   .chapter-nav { grid-template-columns:1fr; gap:1.5rem; }
   .chapter-nav .next { text-align:left; }
-  .editor-lockup { align-items:flex-start; }
+  .footer-top { padding: 2rem 0 1.6rem; }
+  .editor-lockup {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .9rem;
+    width: 100%;
+  }
   .editor-images a,
   .editor-images .editor-placeholder { width:58px; height:58px; }
-  .editor-lockup-text p { font-size:.72rem; }
+  .editor-lockup-text { width: 100%; }
+  .footer-domain {
+    font-size: clamp(1rem, 5.4vw, 1.18rem);
+    line-height: 1.15;
+  }
+  .editor-lockup-text p { font-size:.76rem; line-height: 1.55; }
+  .footer-description { font-size: .78rem; }
+  .footer-bottom { padding: 1.2rem 0 1.45rem; }
+  .footer-bottom p { font-size: .74rem; }
+  .footer-bottom nav { gap: .65rem .9rem; font-size: .67rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior:auto; }
