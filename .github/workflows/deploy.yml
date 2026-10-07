@@ -29,16 +29,13 @@ jobs:
       - name: Build
         run: npm run build
       - name: Configure Pages
-        if: github.event_name == 'workflow_dispatch'
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
-        if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
-    if: github.event_name == 'workflow_dispatch'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
