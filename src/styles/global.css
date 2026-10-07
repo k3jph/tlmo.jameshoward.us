@@ -40,10 +40,14 @@ img { display: block; max-width: 100%; }
 }
 .brand { display: flex; gap: .8rem; align-items: center; text-decoration: none; }
 .brand-mark {
-  width: 46px; height: 46px; border-radius: 50%;
-  display: grid; place-items: center;
-  background: var(--ink); color: var(--paper);
-  font: 700 1.7rem var(--serif);
+  width: 46px; height: 46px;
+  display: block;
+  flex: 0 0 46px;
+}
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .brand strong { display:block; letter-spacing: .11em; font-size:.92rem; }
 .brand small { display:block; font-size:.72rem; opacity:.7; margin-top:.08rem; }
@@ -260,7 +264,7 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; }
 }
 @media (max-width: 520px) {
   .site-header { align-items:center; gap:.5rem; }
-  .brand-mark { width:38px; height:38px; }
+  .brand-mark { width:38px; height:38px; flex-basis:38px; }
   nav a:nth-child(2) { display:none; }
   .hero h1 { font-size:3.35rem; }
   .hero-books { min-height:390px; }
