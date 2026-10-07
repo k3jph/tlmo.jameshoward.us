@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ChapterList from '../../components/ChapterList.astro';
+import { firstEditionChapters, secondEditionChapters } from '../../data/editions';
+---
+<BaseLayout title="Chapters" description="Browse every chapter in both editions of Teaching and Learning Mathematics Online.">
+  <header class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Chapter index</p>
+      <h1>Forty-nine chapter records. Twenty-nine distinct places to start.</h1>
+      <p>The first edition contains 20 chapters. The second retains that foundation and adds nine more. This index keeps the two editions separate while making their relationship visible.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">2025 · Second edition</p><h2>Twenty-nine chapters</h2></div>
+        <p>New second-edition chapters are marked. Select any chapter for its edition history, contributors, and navigation to adjacent material.</p>
+      </div>
+      <ChapterList chapters={secondEditionChapters} editionSlug="second-edition" />
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">2020 · First edition</p><h2>The original twenty</h2></div>
+        <p>The first edition stands on its own here, with direct links into the corresponding second-edition chapters where applicable.</p>
+      </div>
+      <ChapterList chapters={firstEditionChapters} editionSlug="first-edition" />
+    </div>
+  </section>
+</BaseLayout>

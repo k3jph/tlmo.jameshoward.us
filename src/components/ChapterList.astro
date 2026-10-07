@@ -1,0 +1,28 @@
+---
+import type { Chapter } from '../data/editions';
+import { chapterUrl, contributorSlug } from '../data/editions';
+
+const { chapters, editionSlug } = Astro.props as {
+  chapters: Chapter[];
+  editionSlug: string;
+};
+---
+<ol class="chapter-list">
+  {chapters.map(chapter => (
+    <li>
+      <span class="chapter-no">{String(chapter.n).padStart(2, '0')}</span>
+      <div class="chapter-main">
+        <p class="chapter-part">{chapter.part}</p>
+        <h3><a href={chapterUrl(editionSlug, chapter.n)}>{chapter.title}</a></h3>
+        <p class="chapter-authors">
+          {chapter.authors.map((author, index) => (
+            <>
+              <a href={'/contributors/' + contributorSlug(author) + '/'}>{author}</a>{index < chapter.authors.length - 1 ? ', ' : ''}
+            </>
+          ))}
+        </p>
+      </div>
+      {chapter.isNew && <span class="new-badge">New in 2e</span>}
+    </li>
+  ))}
+</ol>

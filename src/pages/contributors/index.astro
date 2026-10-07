@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { contributors } from '../../data/editions';
+---
+<BaseLayout title="Contributors" description="Contributors to both editions of Teaching and Learning Mathematics Online.">
+  <header class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Contributors</p>
+      <h1>The people who did the actual work.</h1>
+      <p>Both editions are collections of working educators and researchers. This directory is built directly from the published chapter bylines and connects each contributor to every chapter they authored in either edition.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="contributor-grid">
+        {contributors.map(contributor => {
+          const years = [...new Set(contributor.contributions.map(item => item.edition.year))];
+          const distinctTitles = new Set(contributor.contributions.map(item => item.title)).size;
+          return (
+            <a class="contributor-card" href={'/contributors/' + contributor.slug + '/'}>
+              <span class="contributor-initial">{contributor.name.charAt(0)}</span>
+              <div>
+                <h2>{contributor.name}</h2>
+                <p>{distinctTitles} {distinctTitles === 1 ? 'chapter' : 'chapters'} · {years.join(' + ')}</p>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

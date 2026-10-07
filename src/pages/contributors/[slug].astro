@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { contributors, chapterUrl } from '../../data/editions';
+
+export function getStaticPaths() {
+  return contributors.map(contributor => ({
+    params: { slug: contributor.slug },
+    props: { contributor }
+  }));
+}
+
+const { contributor } = Astro.props;
+const years = [...new Set(contributor.contributions.map(item => item.edition.year))].sort();
+const distinctTitles = new Set(contributor.contributions.map(item => item.title)).size;
+---
+<BaseLayout title={contributor.name} description={contributor.name + ' — contributor to Teaching and Learning Mathematics Online.'}>
+  <header class="page-hero contributor-hero">
+    <div class="container">
+      <p class="eyebrow">Contributor · {years.join(' + ')}</p>
+      <h1>{contributor.name}</h1>
+      <p>{distinctTitles} {distinctTitles === 1 ? 'distinct chapter' : 'distinct chapters'} across {years.length === 2 ? 'both editions' : 'the ' + years[0] + ' edition'}.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Contributions</p>
+      <div class="contribution-list">
+        {contributor.contributions
+          .sort((a, b) => a.edition.year - b.edition.year || a.n - b.n)
+          .map(item => (
+            <article>
+              <div class="contribution-meta">{item.edition.year} · {item.edition.label} · Chapter {item.n} · {item.part}</div>
+              <h2><a href={chapterUrl(item.edition.slug, item.n)}>{item.title}</a></h2>
+              {item.isNew && <span class="new-badge">New in 2e</span>}
+            </article>
+          ))}
+      </div>
+      <div class="callout"><p>Contributor information on this site is intentionally limited to the published bylines. We would rather omit a biography than guess at somebody’s current title or affiliation.</p></div>
+    </div>
+  </section>
+</BaseLayout>

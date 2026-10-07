@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const groups = [
+  {
+    title: 'Mathematical communication',
+    symbol: 'f(x)',
+    items: [
+      'Decide how students will enter and read mathematical notation without unnecessary friction.',
+      'Test diagrams, graphs, and worked examples at laptop and phone sizes.',
+      'Make the reasoning in worked solutions visible, not merely the final symbolic answer.',
+      'Provide an alternative representation when notation or graphics create an accessibility barrier.'
+    ]
+  },
+  {
+    title: 'Interaction',
+    symbol: '↔',
+    items: [
+      'State which interactions are synchronous, asynchronous, optional, and required.',
+      'Give students a reliable way to ask a mathematical question that does not fit neatly into plain text.',
+      'Design discussion work around mathematical thinking rather than posting quotas.',
+      'Plan how students will see and respond to one another’s reasoning.'
+    ]
+  },
+  {
+    title: 'Assessment',
+    symbol: 'Σ',
+    items: [
+      'Check that the assessment measures the intended mathematics rather than familiarity with the platform.',
+      'Separate routine practice from higher-order reasoning tasks.',
+      'Decide what feedback students receive, how quickly, and in what form.',
+      'Consider how assessment design changes when students have access to software, notes, and online resources.'
+    ]
+  },
+  {
+    title: 'Technology',
+    symbol: 'Δ',
+    items: [
+      'Use a tool because it solves a teaching problem, not because the tool exists.',
+      'Test the student workflow from login through submission before assigning it.',
+      'Have a low-technology fallback for any activity whose failure would stop the course.',
+      'Avoid requiring several platforms when one can do the job.'
+    ]
+  },
+  {
+    title: 'Access and anxiety',
+    symbol: 'ε',
+    items: [
+      'Assume some students arrive with mathematics anxiety and avoid designing unnecessary public failure.',
+      'Make help routes obvious before students need them.',
+      'Check deadlines and synchronous requirements against the needs of working and geographically dispersed students.',
+      'Distinguish a mathematics difficulty from a technology difficulty before trying to solve it.'
+    ]
+  },
+  {
+    title: 'Course structure',
+    symbol: '∫',
+    items: [
+      'Make the weekly rhythm predictable enough that students can spend their attention on mathematics.',
+      'State where instruction, practice, discussion, assessment, and help live.',
+      'Use consistent naming and navigation across modules.',
+      'Audit the course once as a student rather than as the person who built it.'
+    ]
+  }
+];
+---
+<BaseLayout title="Online Mathematics Course Design Checklist" description="A practical companion checklist for designing online mathematics and statistics courses.">
+  <header class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Companion resource</p>
+      <h1>A preflight checklist for online mathematics.</h1>
+      <p>This is a site-original companion resource drawn from recurring problems addressed across both editions. It is not a substitute for the chapters; it is the list you run before students discover the problem for you.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="checklist-grid">
+        {groups.map(group => (
+          <section class="checklist-card">
+            <div class="symbol">{group.symbol}</div>
+            <h2>{group.title}</h2>
+            <ul>
+              {group.items.map(item => (
+                <li><label><input type="checkbox" /> <span>{item}</span></label></li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+      <div class="callout"><p><strong>Design principle:</strong> if a technological choice makes the mathematics harder to see, discuss, or assess, the technology has become part of the problem.</p></div>
+    </div>
+  </section>
+</BaseLayout>

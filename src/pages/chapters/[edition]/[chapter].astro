@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import {
+  editions,
+  firstEditionChapters,
+  secondEditionChapters,
+  firstToSecond,
+  secondToFirst,
+  contributorSlug,
+  chapterUrl
+} from '../../../data/editions';
+
+export function getStaticPaths() {
+  return [
+    ...firstEditionChapters.map(chapter => ({
+      params: { edition: 'first-edition', chapter: String(chapter.n).padStart(2, '0') },
+      props: { chapter, edition: editions[0], editionKey: 'first-edition' }
+    })),
+    ...secondEditionChapters.map(chapter => ({
+      params: { edition: 'second-edition', chapter: String(chapter.n).padStart(2, '0') },
+      props: { chapter, edition: editions[1], editionKey: 'second-edition' }
+    }))
+  ];
+}
+
+const { chapter, edition, editionKey } = Astro.props;
+const chapters = editionKey === 'first-edition' ? firstEditionChapters : secondEditionChapters;
+const counterpartNumber = editionKey === 'first-edition' ? firstToSecond[chapter.n] : secondToFirst[chapter.n];
+const counterpartEdition = editionKey === 'first-edition' ? editions[1] : editions[0];
+const counterpartUrl = counterpartNumber ? chapterUrl(counterpartEdition.slug, counterpartNumber) : null;
+const previous = chapter.n > 1 ? chapters[chapter.n - 2] : null;
+const next = chapter.n < chapters.length ? chapters[chapter.n] : null;
+const publisherUrl = editionKey === 'second-edition'
+  ? 'https://www.routledge.com/Teaching-and-Learning-Mathematics-Online/HowardII-Beyers/p/book/9781032504537'
+  : 'https://doi.org/' + edition.doi;
+---
+<BaseLayout title={'Chapter ' + chapter.n + ' · ' + chapter.title} description={chapter.title + ', from the ' + edition.label.toLowerCase() + ' of Teaching and Learning Mathematics Online.'}>
+  <header class="chapter-hero">
+    <div class="container narrow">
+      <p class="eyebrow">{edition.year} · {edition.label} · {chapter.part}</p>
+      <div class="chapter-kicker-row">
+        <span class="chapter-number-big">{String(chapter.n).padStart(2, '0')}</span>
+        {chapter.isNew && <span class="new-badge">New in 2e</span>}
+      </div>
+      <h1>{chapter.title}</h1>
+      <p class="chapter-byline">
+        {chapter.authors.map((author, index) => (
+          <>
+            <a href={'/contributors/' + contributorSlug(author) + '/'}>{author}</a>{index < chapter.authors.length - 1 ? ', ' : ''}
+          </>
+        ))}
+      </p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container narrow">
+      <div class="chapter-meta-grid">
+        <div><span>Edition</span><strong>{edition.label} · {edition.year}</strong></div>
+        <div><span>Part</span><strong>{chapter.part}</strong></div>
+        <div><span>Chapter</span><strong>{chapter.n} of {edition.chapters}</strong></div>
+      </div>
+
+      {counterpartUrl ? (
+        <div class="edition-bridge">
+          <div>
+            <p class="eyebrow">Across editions</p>
+            <h2>This chapter also appears in the {counterpartEdition.label.toLowerCase()}.</h2>
+            <p>Chapter numbering changed as new material was inserted, so the corresponding chapter is linked directly rather than making you hunt for it.</p>
+          </div>
+          <a class="button secondary" href={counterpartUrl}>Open {counterpartEdition.year} version →</a>
+        </div>
+      ) : (
+        <div class="edition-bridge">
+          <div>
+            <p class="eyebrow">New in 2025</p>
+            <h2>This chapter was added for the second edition.</h2>
+            <p>It is one of nine new chapters expanding the book after five years of rapid change in online mathematics education.</p>
+          </div>
+        </div>
+      )}
+
+      <div class="chapter-actions">
+        <a class="button" href={'/editions/' + edition.slug + '/'}>View the {edition.label.toLowerCase()}</a>
+        <a class="button secondary" href={publisherUrl}>Publisher record ↗</a>
+      </div>
+
+      <nav class="chapter-nav" aria-label="Adjacent chapters">
+        <div>
+          {previous && <><span>Previous</span><a href={chapterUrl(edition.slug, previous.n)}>← {previous.title}</a></>}
+        </div>
+        <div class="next">
+          {next && <><span>Next</span><a href={chapterUrl(edition.slug, next.n)}>{next.title} →</a></>}
+        </div>
+      </nav>
+    </div>
+  </section>
+</BaseLayout>
