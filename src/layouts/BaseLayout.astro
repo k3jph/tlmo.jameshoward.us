@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
   title?: string;
@@ -16,6 +17,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const pageTitle = title === 'Teaching and Learning Mathematics Online'
   ? title
   : `${title} · Teaching and Learning Mathematics Online`;
+const currentYear = new Date().getFullYear();
+const umgcLogo = "https://mvsfservicefabricusva.blob.core.windows.net/medialibrary-d893c12fb7a1499f83a111d7a377e2eb-r/990770e39d06443c9298c6ca5632ec52/e22a094557804e31ac04ef2fac775f60/Medium/%20GRPHC-logo-clear-space-preferred-alternate.jpg?se=2036-04-23T04%3A39%3A56Z&si=202405281602&sig=G2vAPtmmwxa5Ejmya8BfOUG6PNptov0GbK8bRYOzNGo%3D&sr=b&st=1942-04-27T13%3A43%3A17Z&sv=2017-04-17";
 ---
 <!doctype html>
 <html lang="en">
@@ -52,20 +55,40 @@ const pageTitle = title === 'Teaching and Learning Mathematics Online'
         <a href="/resources/">Resources</a>
       </nav>
     </header>
-    <main id="main"><slot /></main>
+    <main id="main" tabindex="-1"><slot /></main>
+
     <footer class="site-footer">
-      <div>
-        <strong>Teaching and Learning Mathematics Online</strong>
-        <p>Edited by James P. Howard, II and John F. Beyers.</p>
+      <div class="footer-top">
+        <div class="editor-lockup">
+          <div class="editor-images" aria-label="Editors">
+            <a href="https://jameshoward.us/" aria-label="James P. Howard, II">
+              <img src="https://jameshoward.us/assets/img/identity/jh-badge-1x1.svg" alt="" width="68" height="68" loading="lazy" />
+            </a>
+            <a href="https://www.umgc.edu/faculty-list" aria-label="John F. Beyers at University of Maryland Global Campus">
+              <img class="umgc-mark" src={umgcLogo} alt="" width="68" height="68" loading="lazy" />
+            </a>
+          </div>
+          <div class="editor-lockup-text">
+            <a class="footer-domain" href="/">tlmo.jameshoward.us</a>
+            <p>A website of <a href="https://jameshoward.us/">James P. Howard, II</a> and <a href="https://www.umgc.edu/faculty-list">John F. Beyers</a>.</p>
+          </div>
+        </div>
+        <p class="footer-description">A companion to <cite>Teaching and Learning Mathematics Online</cite>.<br />Two editions. Shared practice.</p>
       </div>
-      <div class="footer-links">
-        <a href="/about/">About</a>
-        <a href="/cite/">Cite</a>
-        <a href="/errata/">Errata</a>
-        <a href="/editions/first-edition/">2020 edition</a>
-        <a href="/editions/second-edition/">2025 edition</a>
-        <a href="https://www.routledge.com/Teaching-and-Learning-Mathematics-Online/HowardII-Beyers/p/book/9781032504537">Publisher ↗</a>
+
+      <div class="footer-bottom">
+        <p>Copyright © 2020–{currentYear} James P. Howard, II and John F. Beyers.</p>
+        <nav aria-label="Site notices">
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact &amp; corrections</a>
+          <a href="/notices/#privacy">Privacy Notice</a>
+          <a href="/notices/#cookies" data-cookie-preferences>Cookie Settings</a>
+          <a href="/notices/#terms">Terms of Use</a>
+          <a href="/notices/#copyright">Copyright</a>
+        </nav>
       </div>
     </footer>
+
+    <CookieConsent />
   </body>
 </html>

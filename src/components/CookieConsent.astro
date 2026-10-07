@@ -1,0 +1,29 @@
+---
+import { analyticsId, consentVersion } from '../data/site-settings';
+---
+<div id="privacy-controls" data-ga-id={analyticsId} data-policy-version={consentVersion}>
+  <section id="cookie-banner" class="cookie-banner" role="region" aria-labelledby="cookie-title" hidden>
+    <div class="cookie-banner-copy">
+      <h2 id="cookie-title">Analytics cookies</h2>
+      <p>Optional Google Analytics helps us understand how readers use this companion site. Analytics will not load unless you accept, and rejecting it does not change your access to anything here.</p>
+      <a href="/notices/#privacy">Read the privacy and cookie notice</a>
+    </div>
+    <div class="cookie-actions" role="group" aria-label="Analytics cookie choices">
+      <button type="button" data-cookie-reject>Reject analytics</button>
+      <button type="button" data-cookie-accept>Accept analytics</button>
+    </div>
+  </section>
+
+  <dialog id="cookie-settings" class="cookie-dialog" aria-labelledby="cookie-settings-title" aria-describedby="cookie-settings-description">
+    <h2 id="cookie-settings-title">Cookie settings</h2>
+    <p id="cookie-settings-description">Choose whether this browser may load optional Google Analytics. Necessary preference storage is separate from analytics.</p>
+    <p data-cookie-state role="status" aria-live="polite"></p>
+    <div class="cookie-actions">
+      <button type="button" data-cookie-reject>Reject analytics</button>
+      <button type="button" data-cookie-accept>Accept analytics</button>
+    </div>
+    <p class="cookie-small">When you make a choice, this site remembers it in one first-party preference cookie for up to one year. <a href="/notices/#cookies">About cookies and storage.</a></p>
+    <button type="button" class="cookie-close" data-cookie-close autofocus>Close settings</button>
+  </dialog>
+</div>
+<script src="../scripts/consent.js"></script>

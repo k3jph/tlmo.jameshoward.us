@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Site Notices" description="Privacy, cookie, terms of use, and copyright notices for the Teaching and Learning Mathematics Online companion site.">
+  <header class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Site notices</p>
+      <h1>The necessary small print.</h1>
+      <p>This companion is intentionally simple. These notices explain what the site stores, what it measures, and who owns what.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container narrow legal-copy">
+      <section id="privacy">
+        <p class="eyebrow">Privacy notice</p>
+        <h2>Analytics is optional.</h2>
+        <p>This site uses Google Analytics 4 to understand broad patterns of use, such as which pages are visited and how readers move through the site. It uses measurement ID <code>G-FSDET4HG4L</code>, the same analytics property used by jameshoward.us.</p>
+        <p>Google Analytics is not loaded until you explicitly accept analytics cookies. If you reject analytics, or if your browser sends a Global Privacy Control signal, the analytics tag remains disabled. The site does not use Google advertising signals or personalization features.</p>
+        <p>When analytics is enabled, this site sends the page origin and path but deliberately excludes query strings from the page location supplied to Google Analytics.</p>
+      </section>
+
+      <section id="cookies">
+        <p class="eyebrow">Cookies and storage</p>
+        <h2>One preference cookie; analytics only by consent.</h2>
+        <p>The site stores one first-party preference cookie, <code>tlmo-consent</code>, so that it can remember whether you accepted or rejected optional analytics. The preference expires after one year.</p>
+        <p>If analytics is accepted, Google Analytics may set cookies such as <code>_ga</code> and related identifiers. If analytics is later rejected, the site attempts to remove those analytics cookies and does not load the analytics tag on subsequent pages.</p>
+        <p><button class="inline-settings-button" type="button" data-cookie-preferences>Open Cookie Settings</button></p>
+      </section>
+
+      <section id="terms">
+        <p class="eyebrow">Terms of use</p>
+        <h2>Use the site sensibly.</h2>
+        <p>This website is an informational companion to <em>Teaching and Learning Mathematics Online</em>. It is provided as-is for educational and scholarly use. External links are provided for convenience and do not imply endorsement of every statement or service on an external site.</p>
+        <p>Nothing on this site replaces the published text of either edition. Where bibliographic information differs from a publisher's current record, the publisher's record controls.</p>
+      </section>
+
+      <section id="copyright">
+        <p class="eyebrow">Copyright</p>
+        <h2>Site material and book material are not the same thing.</h2>
+        <p>Copyright © 2020–{new Date().getFullYear()} James P. Howard, II and John F. Beyers. Site-original text, design, and teaching resources are reserved unless a page states otherwise.</p>
+        <p>The books, chapter texts, cover art, publisher marks, and third-party logos remain subject to their respective copyrights, trademarks, licenses, and publisher terms. University of Maryland Global Campus marks are used only to identify John F. Beyers's institutional affiliation and remain the property of UMGC.</p>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
