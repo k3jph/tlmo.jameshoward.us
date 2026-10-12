@@ -1,0 +1,26 @@
+# Teaching and Learning Mathematics Online
+
+> The official companion site for *Teaching and Learning Mathematics Online*, edited by James P. Howard, II and John F. Beyers, covering the 2020 first edition and the 2025 second edition.
+
+Website: https://tlmo.jameshoward.us/
+Editors: James P. Howard, II; John F. Beyers
+
+## Main content
+
+- [About](https://tlmo.jameshoward.us/about/): purpose and scope of the companion site.
+- [Editions](https://tlmo.jameshoward.us/editions/): records for the first and second editions.
+- [Chapters](https://tlmo.jameshoward.us/chapters/): chapter information organized across both editions.
+- [Contributors](https://tlmo.jameshoward.us/contributors/): contributor records.
+- [Resources](https://tlmo.jameshoward.us/resources/): teaching and companion resources.
+- [Errata](https://tlmo.jameshoward.us/errata/): corrections and errata.
+- [Cite](https://tlmo.jameshoward.us/cite/): citation guidance.
+- [Notices](https://tlmo.jameshoward.us/notices/): site notices and rights information.
+- [Contact](https://tlmo.jameshoward.us/contact/): public contact information.
+
+## Interpretation notes
+
+This is a companion to the published edited volumes, not a reproduction of the books. Chapter and contributor records should be used together with the edition information when identifying a contribution.
+
+## Related
+
+- [James Howard](https://jameshoward.us/): co-editor profile, scholarship, teaching, and related projects.
